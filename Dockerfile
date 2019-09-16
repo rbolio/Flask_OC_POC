@@ -14,14 +14,14 @@ WORKDIR /usr/src/app
 
 # --- Python Setup ---
 ADD . .
-RUN pip install -r app/requirements.pip
+RUN pip install -r requirements.txt
 
 # --- Nginx Setup ---
 COPY config/nginx/default.conf /etc/nginx/conf.d/
 RUN chmod g+rwx /var/cache/nginx /var/run /var/log/nginx
 RUN chgrp -R root /var/cache/nginx
 RUN sed -i.bak 's/^user/#user/' /etc/nginx/nginx.conf
-RUN addgroup nginx root
+RUN chrmodaddgroup nginx root
 
 # --- Expose and CMD ---
 EXPOSE 8081
